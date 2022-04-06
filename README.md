@@ -1,4 +1,3 @@
-<h1 align="center">BlueLib</h1>
 <p align="center">
 	<img src="https://github.com/paulevsGitch/BlueLib/blob/main/bluelib_logo.png" width="200px" height="200px"/>
 </p>
