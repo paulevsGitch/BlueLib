@@ -3,6 +3,7 @@ package paulevs.bluelib.blueprint;
 
 import paulevs.bluelib.blueprint.element.BlueprintElement;
 import paulevs.bluelib.blueprint.object.BlueprintObject;
+import paulevs.bluelib.blueprint.plant.BlueprintPlant;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,6 +17,7 @@ public class Blueprint {
 	
 	public final List<BlueprintElement> elements = new ArrayList<>();
 	public final List<BlueprintObject> objects = new ArrayList<>();
+	public final List<BlueprintPlant> plants = new ArrayList<>();
 	public BufferedImage screenshot;
 	public BufferedImage thumbnail;
 	public byte version;
@@ -58,6 +60,14 @@ public class Blueprint {
 	 */
 	public void addObject(BlueprintObject object) {
 		objects.add(object);
+	}
+	
+	/**
+	 * Add new plant to this blueprint.
+	 * @param object {@link BlueprintObject} to add.
+	 */
+	public void addPlant(BlueprintPlant object) {
+		plants.add(object);
 	}
 	
 	static {

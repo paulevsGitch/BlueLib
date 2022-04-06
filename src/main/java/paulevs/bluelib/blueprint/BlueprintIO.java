@@ -5,6 +5,7 @@ import net.jpountz.lz4.LZ4Factory;
 import net.jpountz.lz4.LZ4FastDecompressor;
 import paulevs.bluelib.blueprint.element.BlueprintElement;
 import paulevs.bluelib.blueprint.object.BlueprintObject;
+import paulevs.bluelib.blueprint.plant.BlueprintPlant;
 import paulevs.bluelib.stream.LittleEndianDataOutputStream;
 
 import javax.imageio.ImageIO;
@@ -205,6 +206,12 @@ public class BlueprintIO {
 			blueprint.addObject(new BlueprintObject(buffer));
 		}
 		
+		// Read plants //
+		count = buffer.getInt();
+		for (int i = 0; i < count; i++) {
+			blueprint.addPlant(new BlueprintPlant(buffer));
+		}
+		
 		return blueprint;
 	}
 	
@@ -324,7 +331,12 @@ public class BlueprintIO {
 			object.write(dataBuffer);
 		}
 		
-		dataBuffer.putInt(0);
+		count = blueprint.plants.size();
+		dataBuffer.putInt(count);
+		for (BlueprintPlant plant: blueprint.plants) {
+			plant.write(dataBuffer);
+		}
+		
 		dataBuffer.putInt(0);
 		
 		int dataStart = stream.getSize();
@@ -476,9 +488,18 @@ public class BlueprintIO {
 	 * @param buffer {@link ByteBuffer} to read boolean from.
 	 * @return boolean value.
 	 */
-	private static boolean readBoolean(ByteBuffer buffer) {
+	public static boolean readBoolean(ByteBuffer buffer) {
 		byte data = buffer.get();
 		return data > 0;
+	}
+	
+	/**
+	 * Write boolean into byte buffer.
+	 * @param buffer {@link ByteBuffer} to write boolean into.
+	 * @param value boolean value.
+	 */
+	public static void writeBoolean(ByteBuffer buffer, boolean value) {
+		buffer.put(value ? (byte) 1 : (byte) 0);
 	}
 	
 	/**
