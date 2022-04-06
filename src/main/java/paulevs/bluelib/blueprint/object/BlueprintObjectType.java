@@ -71,6 +71,15 @@ public class BlueprintObjectType {
 		return NAMES.getOrDefault(type, UNKNOWN);
 	}
 	
+	/**
+	 * Check if object of this type has name.
+	 * @param type type of the object as short.
+	 * @return {@code true} if there is a name for object.
+	 */
+	public static boolean isKnownObject(short type) {
+		return NAMES.containsKey(type);
+	}
+	
 	static {
 		NAMES.put(BRAZIER, "brazier");
 		NAMES.put(DOOR_1, "door1");

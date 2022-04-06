@@ -63,6 +63,15 @@ public class BlueprintElementType {
 		return NAMES.getOrDefault(type, UNKNOWN);
 	}
 	
+	/**
+	 * Check if element of this type has name.
+	 * @param type type of the element as byte.
+	 * @return {@code true} if there is a name for element.
+	 */
+	public static boolean isKnownElement(byte type) {
+		return NAMES.containsKey(type);
+	}
+	
 	static {
 		NAMES.put(BLOCK, "block");
 		NAMES.put(CYLINDER, "cylinder");
