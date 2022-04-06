@@ -26,6 +26,52 @@ Library depends on [LZ4 Java](https://github.com/lz4/lz4-java) library.
 - BlueprintVersion - contains blueprint version IDs.
 
 ## Usage
+### Adding to project
+
+If you are using Gradle adding library to your project is simple:
+
+1. Add jitpack and maven central to your gradle repositories section in build.gradle:
+
+```
+repositories {
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+}
+```
+
+2. Add library into dependency section in build.gradle:
+
+```
+dependencies {
+    implementation 'org.lz4:lz4-java:1.8.0'
+    implementation 'com.github.paulevsGitch:BlueLib:0.1.0'
+}
+```
+<br>
+If you want to make your project more configurable you can replace
+
+```
+implementation 'com.github.paulevsGitch:BlueLib:0.1.0'
+```
+
+with
+
+```
+implementation 'com.github.paulevsGitch:BlueLib:${project.bluelib_version}'
+```
+
+and add version into your gradle.properties:
+
+```
+bluelib_version = 0.1.0
+```
+
+If you want to use specific commit you can use commit hash instead of numeric version, example:
+
+```
+bluelib_version = d480b08
+```
+
 ### Creating new blueprint
 
 Each blueprint require some fields to be initialised on startup, these fields
