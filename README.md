@@ -43,9 +43,7 @@ Blueprint blueprint = Blueprint.create(); // Create blueprint
 blueprint.name = "MyGreatBlueprint"; // Set bluepint name
 
 // Set blueprint size
-blueprint.sizeX = 2;
-blueprint.sizeZ = 2;
-blueprint.sizeY = 2;
+blueprint.setSize(2, 2, 2);
 
 // Creating new element
 BlueprintElement element = new BlueprintElement(BlueprintElementType.BLOCK);
