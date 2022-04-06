@@ -9,7 +9,8 @@ A library for Rising World Unity blueprint format.
 Library use [published blueprint format](https://forum.rising-world.net/thread/11808-blueprints-format-unity/?postID=87733#post87733).
 At this moment library supports only V6 blueprint format (GameVersion 0.4.5).
 
-Library depends on [LZ4 Java](https://github.com/lz4/lz4-java) library.
+Library depends on [LZ4 Java](https://github.com/lz4/lz4-java) library (version 1.8.0).
+Library can be used with Java 8 and higher.
 
 ### Main features:
 - BlueprintIO - allows to save and load blueprints from files, streams and buffers;
