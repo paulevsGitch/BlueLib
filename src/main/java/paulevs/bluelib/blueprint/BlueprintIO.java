@@ -306,18 +306,24 @@ public class BlueprintIO {
 		 *    xx  - serialized terrain data (currently unused)
 		 */
 		
-		int elementCount = blueprint.elements.size();
+		int count = blueprint.elements.size();
 		int predictedCapacity = 16;
 		predictedCapacity += BlueprintElement.BYTES * blueprint.elements.size();
 		predictedCapacity += BlueprintObject.BYTES * blueprint.objects.size();
 		ByteBuffer dataBuffer = ByteBuffer.allocate(predictedCapacity).order(ByteOrder.LITTLE_ENDIAN);
 		dataBuffer.rewind();
 		
-		dataBuffer.putInt(elementCount);
+		dataBuffer.putInt(count);
 		for (BlueprintElement element: blueprint.elements) {
 			element.write(dataBuffer);
 		}
-		dataBuffer.putInt(0);
+		
+		count = blueprint.objects.size();
+		dataBuffer.putInt(count);
+		for (BlueprintObject object: blueprint.objects) {
+			object.write(dataBuffer);
+		}
+		
 		dataBuffer.putInt(0);
 		dataBuffer.putInt(0);
 		

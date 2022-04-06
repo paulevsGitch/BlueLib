@@ -1,7 +1,5 @@
 package paulevs.bluelib.blueprint.object;
 
-import paulevs.bluelib.blueprint.element.BlueprintElementType;
-
 import java.nio.ByteBuffer;
 
 public class BlueprintObject {
@@ -26,12 +24,10 @@ public class BlueprintObject {
 	
 	/**
 	 * Construct empty object with specified type and variation, with some default values.
-	 * @param type element type.
-	 * @param variation element variation.
+	 * @param type object type. See {@link BlueprintObjectType} constants for available built-in element types.
 	 */
-	public BlueprintObject(short type, int variation) {
+	public BlueprintObject(short type) {
 		this.type = type;
-		this.variation = variation;
 		rotW = 1.0F;
 		sizeX = 1.0F;
 		sizeY = 1.0F;
@@ -102,5 +98,90 @@ public class BlueprintObject {
 		buffer.put(status);
 		buffer.putLong(additionalInfo);
 		buffer.putInt(additionalFlags);
+	}
+	
+	/**
+	 * Set object color based on 4 float RGBA channel values.
+	 * @param r red channel component [0.0 - 1.0].
+	 * @param g green channel component [0.0 - 1.0].
+	 * @param b blue channel component [0.0 - 1.0].
+	 * @param a alpha channel component [0.0 - 1.0].
+	 */
+	public void setColor(float r, float g, float b, float a) {
+		setColor((int) (r * 255), (int) (g * 255), (int) (b * 255), (int) (a * 255));
+	}
+	
+	/**
+	 * Set object color based on 4 int RGBA channel values.
+	 * @param r red channel component [0 - 255].
+	 * @param g green channel component [0 - 255].
+	 * @param b blue channel component [0 - 255].
+	 * @param a alpha channel component [0 - 255].
+	 */
+	public void setColor(int r, int g, int b, int a) {
+		rgba = r << 24 | g << 16 | b << 8 | a;
+	}
+	
+	/**
+	 * Set object size. Default size is 1.0, 1.0, 1.0.
+	 * @param x scale by X axis.
+	 * @param y scale by Y axis.
+	 * @param z scale by Z axis.
+	 */
+	public void setSize(float x, float y, float z) {
+		sizeX = x;
+		sizeY = y;
+		sizeZ = z;
+	}
+	
+	/**
+	 * Set object position. Position is relative to object center.
+	 * Default position is 0.0, 0.0, 0.0.
+	 * @param x position on X axis.
+	 * @param y position on Y axis.
+	 * @param z position on Z axis.
+	 */
+	public void setPosition(float x, float y, float z) {
+		posX = x;
+		posY = y;
+		posZ = z;
+	}
+	
+	/**
+	 * Set object rotation in quaternion format (Unity). Rotation is applied around object center.
+	 * @param x quaternion X component.
+	 * @param y quaternion Y component.
+	 * @param z quaternion Z component.
+	 * @param w quaternion W component.
+	 */
+	public void setRotation(float x, float y, float z, float w) {
+		rotX = x;
+		rotY = y;
+		rotZ = z;
+		rotW = w;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder("[");
+		builder.append("posX: "); builder.append(posX);
+		builder.append(", posY: "); builder.append(posY);
+		builder.append(", posZ: "); builder.append(posZ);
+		builder.append(", rotX: "); builder.append(rotX);
+		builder.append(", rotY: "); builder.append(rotY);
+		builder.append(", rotZ: "); builder.append(rotZ);
+		builder.append(", rotW: "); builder.append(rotW);
+		builder.append(", sizeX: "); builder.append(sizeX);
+		builder.append(", sizeY: "); builder.append(sizeY);
+		builder.append(", sizeZ: "); builder.append(sizeZ);
+		builder.append(", type: "); builder.append(type);
+		builder.append(" ("); builder.append(BlueprintObjectType.getObjectName(type)); builder.append(")");
+		builder.append(", variation: "); builder.append(variation);
+		builder.append(", rgba: "); builder.append(rgba);
+		builder.append(", status: "); builder.append(status);
+		builder.append(", additionalInfo: "); builder.append(additionalInfo);
+		builder.append(", additionalFlags: "); builder.append(additionalFlags);
+		builder.append("]");
+		return builder.toString();
 	}
 }
