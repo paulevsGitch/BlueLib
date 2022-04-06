@@ -317,6 +317,7 @@ public class BlueprintIO {
 		int predictedCapacity = 16;
 		predictedCapacity += BlueprintElement.BYTES * blueprint.elements.size();
 		predictedCapacity += BlueprintObject.BYTES * blueprint.objects.size();
+		predictedCapacity += BlueprintPlant.BYTES * blueprint.plants.size();
 		ByteBuffer dataBuffer = ByteBuffer.allocate(predictedCapacity).order(ByteOrder.LITTLE_ENDIAN);
 		dataBuffer.rewind();
 		
