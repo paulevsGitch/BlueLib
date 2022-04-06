@@ -1,6 +1,9 @@
 <p align="center">
 	<img src="https://github.com/paulevsGitch/BlueLib/blob/main/bluelib_logo.png" width="200px" height="200px"/>
 </p>
+<p align="center">
+	<a href="https://jitpack.io/#paulevsGitch/BlueLib"><img src="https://jitpack.io/v/paulevsGitch/BlueLib.svg"/></a>
+</p>
 
 A library for Rising World Unity blueprint format.
 Library use [published blueprint format](https://forum.rising-world.net/thread/11808-blueprints-format-unity/?postID=87733#post87733).
