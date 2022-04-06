@@ -70,6 +70,32 @@ public class Blueprint {
 		plants.add(object);
 	}
 	
+	/**
+	 * Set blueprint size.
+	 * Default size is 1.0, 1.0, 1.0.
+	 * @param x scale by X axis.
+	 * @param y scale by Y axis.
+	 * @param z scale by Z axis.
+	 */
+	public void setSize(float x, float y, float z) {
+		sizeX = x;
+		sizeY = y;
+		sizeZ = z;
+	}
+	
+	/**
+	 * Set blueprint position. Position equals to blueprint center.
+	 * Default position is 0.0, 0.0, 0.0.
+	 * @param x position on X axis.
+	 * @param y position on Y axis.
+	 * @param z position on Z axis.
+	 */
+	public void setPosition(float x, float y, float z) {
+		posX = x;
+		posY = y;
+		posZ = z;
+	}
+	
 	static {
 		EMPTY_IMAGE_THUMB = new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = EMPTY_IMAGE_THUMB.getGraphics();

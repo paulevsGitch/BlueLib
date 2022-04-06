@@ -92,7 +92,8 @@ public class BlueprintPlant {
 	}
 	
 	/**
-	 * Set object size. Default size is 1.0, 1.0, 1.0.
+	 * Set object size.
+	 * Default size is 1.0, 1.0, 1.0.
 	 * @param x scale by X axis.
 	 * @param y scale by Y axis.
 	 * @param z scale by Z axis.
