@@ -4,6 +4,7 @@
 
 A library for Rising World Unity blueprint format.
 Library use [published blueprint format](https://forum.rising-world.net/thread/11808-blueprints-format-unity/?postID=87733#post87733).
+At this moment library supports only V6 blueprint format (GameVersion 0.4.5).
 
 Library depends on [LZ4 Java](https://github.com/lz4/lz4-java) library.
 
@@ -11,11 +12,14 @@ Library depends on [LZ4 Java](https://github.com/lz4/lz4-java) library.
 - BlueprintIO - allows to save and load blueprints from files, streams and buffers;
 - Blueprint - class that represent blueprint instance;
 - BlueprintElement - construction elements in blueprints;
-- BlueprintObject - objects (plants/furniture) in blueprints;
+- BlueprintObject - objects (furniture) in blueprints;
+- BlueprintPlant - plants in blueprints;
 - LittleEndianDataOutputStream - stream to save data in LittleEndian order.
 
 ### Constants:
 - BlueprintElementType - contains default construction element types (with names from definitions.db);
+- BlueprintObjectType - contains default object types (with names from definitions.db);
+- BlueprintPlantType - contains default plant types (with names from definitions.db);
 - BlueprintVersion - contains blueprint version IDs.
 
 ## Usage
@@ -57,6 +61,8 @@ catch (IOException exception) {
     exception.printStackTrace();
 }
 ```
+
+Objects and Plants have almost same behaviour and constructors as Elements.
 
 ### Loading existing blueprint
 
