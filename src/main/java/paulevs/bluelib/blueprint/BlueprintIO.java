@@ -438,8 +438,15 @@ public class BlueprintIO {
 		stream.writeShort((short) image.getHeight());
 		writeString(stream, "JPG");
 		
+		if (image.getType() != BufferedImage.TYPE_INT_RGB) {
+			BufferedImage rgbImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+			rgbImage.getGraphics().drawImage(image, 0, 0, null);
+			image = rgbImage;
+		}
+		
 		ByteArrayOutputStream imageStream = new ByteArrayOutputStream();
 		ImageIO.write(image, "JPG", imageStream);
+		imageStream.flush();
 		byte[] data = imageStream.toByteArray();
 		imageStream.close();
 		

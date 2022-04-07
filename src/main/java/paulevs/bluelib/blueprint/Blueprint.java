@@ -97,7 +97,7 @@ public class Blueprint {
 	}
 	
 	static {
-		EMPTY_IMAGE_THUMB = new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB);
+		EMPTY_IMAGE_THUMB = new BufferedImage(128, 128, BufferedImage.TYPE_INT_RGB);
 		Graphics g = EMPTY_IMAGE_THUMB.getGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 64, 64);
@@ -106,8 +106,8 @@ public class Blueprint {
 		g.fillRect(64, 0, 64, 64);
 		g.fillRect(0, 64, 64, 64);
 		
-		EMPTY_IMAGE_SCREEN = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
-		g = EMPTY_IMAGE_THUMB.getGraphics();
+		EMPTY_IMAGE_SCREEN = new BufferedImage(512, 512, BufferedImage.TYPE_INT_RGB);
+		g = EMPTY_IMAGE_SCREEN.getGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 256, 256);
 		g.fillRect(256, 256, 256, 256);

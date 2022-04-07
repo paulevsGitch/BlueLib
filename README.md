@@ -45,14 +45,14 @@ repositories {
 ```
 dependencies {
     implementation 'org.lz4:lz4-java:1.8.0'
-    implementation 'com.github.paulevsGitch:BlueLib:0.1.0'
+    implementation 'com.github.paulevsGitch:BlueLib:0.1.1'
 }
 ```
 <br>
 If you want to make your project more configurable you can replace
 
 ```
-implementation 'com.github.paulevsGitch:BlueLib:0.1.0'
+implementation 'com.github.paulevsGitch:BlueLib:0.1.1'
 ```
 
 with
@@ -64,7 +64,7 @@ implementation 'com.github.paulevsGitch:BlueLib:${project.bluelib_version}'
 and add version into your gradle.properties:
 
 ```
-bluelib_version = 0.1.0
+bluelib_version = 0.1.1
 ```
 
 If you want to use specific commit you can use commit hash instead of numeric version, example:
