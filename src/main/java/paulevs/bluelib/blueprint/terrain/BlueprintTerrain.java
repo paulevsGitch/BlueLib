@@ -113,8 +113,17 @@ public class BlueprintTerrain {
 		builder.append("sizeX: "); builder.append(sizeX);
 		builder.append(", sizeY: "); builder.append(sizeY);
 		builder.append(", sizeZ: "); builder.append(sizeZ);
-		builder.append(", strength: "); builder.append(Arrays.toString(strength));
-		builder.append(", materials: "); builder.append(Arrays.toString(materials));
+		if (materials.length > 0) {
+			builder.append(", strength: ");
+			builder.append(Arrays.toString(strength));
+			builder.append(", materials: [");
+			builder.append(TerrainMaterial.getMaterialName(materials[0]));
+			for (int i = 1; i < materials.length; i++) {
+				builder.append(", ");
+				builder.append(TerrainMaterial.getMaterialName(materials[i]));
+			}
+			builder.append("]");
+		}
 		builder.append("]");
 		return builder.toString();
 	}
