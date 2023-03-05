@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'paulevs.bluelib'
-version '0.1.1'
+version '0.2.0'
 
 repositories {
 	mavenCentral()
@@ -11,8 +11,4 @@ repositories {
 
 dependencies {
 	implementation 'org.lz4:lz4-java:1.8.0'
-}
-
-test {
-	useJUnitPlatform()
 }

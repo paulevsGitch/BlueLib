@@ -6,6 +6,7 @@ import net.jpountz.lz4.LZ4FastDecompressor;
 import paulevs.bluelib.blueprint.element.BlueprintElement;
 import paulevs.bluelib.blueprint.object.BlueprintObject;
 import paulevs.bluelib.blueprint.plant.BlueprintPlant;
+import paulevs.bluelib.blueprint.terrain.BlueprintTerrain;
 import paulevs.bluelib.stream.LittleEndianDataOutputStream;
 
 import javax.imageio.ImageIO;
@@ -187,8 +188,8 @@ public class BlueprintIO {
 		 *    xx  - serialized object data (see below)
 		 *     4  - number of plants in blueprint
 		 *     xx - serialized plant data (see below)
-		 *     4  - terrain data length (currently unused)
-		 *     xx - serialized terrain data (currently unused)
+		 *     4  - terrain data length
+		 *     xx - serialized terrain data
 		 */
 		
 		buffer = ByteBuffer.wrap(restored).order(ByteOrder.LITTLE_ENDIAN);
@@ -210,6 +211,12 @@ public class BlueprintIO {
 		count = buffer.getInt();
 		for (int i = 0; i < count; i++) {
 			blueprint.addPlant(new BlueprintPlant(buffer));
+		}
+		
+		// Read terrain //
+		count = buffer.getInt();
+		if (count > 0) {
+			blueprint.terrain = new BlueprintTerrain(buffer);
 		}
 		
 		return blueprint;
@@ -309,8 +316,8 @@ public class BlueprintIO {
 		 *     xx - serialized object data (see below)
 		 *     4  - number of plants in blueprint
 		 *    xx  - serialized plant data (see below)
-		 *     4  - terrain data length (currently unused)
-		 *    xx  - serialized terrain data (currently unused)
+		 *     4  - terrain data length
+		 *    xx  - serialized terrain data
 		 */
 		
 		int count = blueprint.elements.size();
@@ -318,6 +325,9 @@ public class BlueprintIO {
 		predictedCapacity += BlueprintElement.BYTES * blueprint.elements.size();
 		predictedCapacity += BlueprintObject.BYTES * blueprint.objects.size();
 		predictedCapacity += BlueprintPlant.BYTES * blueprint.plants.size();
+		if (blueprint.terrain != null) {
+			predictedCapacity += blueprint.terrain.getCapacity();
+		}
 		ByteBuffer dataBuffer = ByteBuffer.allocate(predictedCapacity).order(ByteOrder.LITTLE_ENDIAN);
 		dataBuffer.rewind();
 		
@@ -338,7 +348,12 @@ public class BlueprintIO {
 			plant.write(dataBuffer);
 		}
 		
-		dataBuffer.putInt(0);
+		if (blueprint.terrain == null) {
+			dataBuffer.putInt(0);
+		}
+		else {
+			blueprint.terrain.write(dataBuffer);
+		}
 		
 		int dataStart = stream.getSize();
 		byte[] uncompressed = dataBuffer.array();
