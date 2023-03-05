@@ -64,12 +64,19 @@ public class BlueprintTerrain {
 		this.sizeY = y;
 		this.sizeZ = z;
 		int capacity = x * y * z;
+		if (capacity < 0) {
+			throw new RuntimeException("Incorrect terrain bounds: " + x + " " + y + " " + z);
+		}
 		materials = new byte[capacity];
 		strength = new byte[capacity];
+		if (getCapacity() < 0) {
+			throw new RuntimeException("Incorrect terrain bounds: " + x + " " + y + " " + z);
+		}
 	}
 	
 	private int getIndex(int x, int y, int z) {
-		return (y * sizeZ + z) * sizeX + x;
+		//return (y * sizeZ + z) * sizeX + x;
+		return (z * sizeY + y) * sizeX + x;
 	}
 	
 	private boolean isOutside(int x, int y, int z) {
@@ -117,10 +124,10 @@ public class BlueprintTerrain {
 			builder.append(", strength: ");
 			builder.append(Arrays.toString(strength));
 			builder.append(", materials: [");
-			builder.append(TerrainMaterial.getMaterialName(materials[0]));
+			builder.append(TerrainMaterial.getMaterialName(materials[0] & 255));
 			for (int i = 1; i < materials.length; i++) {
 				builder.append(", ");
-				builder.append(TerrainMaterial.getMaterialName(materials[i]));
+				builder.append(TerrainMaterial.getMaterialName(materials[i] & 255));
 			}
 			builder.append("]");
 		}

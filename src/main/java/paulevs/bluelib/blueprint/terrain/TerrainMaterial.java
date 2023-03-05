@@ -1,8 +1,5 @@
 package paulevs.bluelib.blueprint.terrain;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class TerrainMaterial {
 	public static final byte AIR = 0;
 	public static final byte STONE = 1;
@@ -37,14 +34,120 @@ public class TerrainMaterial {
 	public static final byte HELLSTONE_HOT = 30;
 	public static final byte COBBLE = 31;
 	
-	public static final byte LAST_ID = COBBLE;
+	public static final byte COAL_ORE = 50;
+	public static final byte SULFUR_ORE = 51;
+	public static final byte IRON_ORE = 52;
+	public static final byte ALUMINIUM_ORE = 53;
+	public static final byte TUNGSTEN_ORE = 54;
+	public static final byte GOLD_ORE = 55;
+	
+	public static final byte GRASS_0 = 100;
+	public static final byte GRASS_1 = 101;
+	public static final byte GRASS_2 = 102;
+	public static final byte GRASS_3 = 103;
+	public static final byte GRASS_4 = 104;
+	
+	public static final byte GRASS_ARID_0 = 105;
+	public static final byte GRASS_ARID_1 = 106;
+	public static final byte GRASS_ARID_2 = 107;
+	public static final byte GRASS_ARID_3 = 108;
+	public static final byte GRASS_ARID_4 = 109;
+	
+	public static final byte GRASS_DRY_0 = 110;
+	public static final byte GRASS_DRY_1 = 111;
+	public static final byte GRASS_DRY_2 = 112;
+	public static final byte GRASS_DRY_3 = 113;
+	public static final byte GRASS_DRY_4 = 114;
+	
+	public static final byte GRASS_DEAD_0 = 115;
+	public static final byte GRASS_DEAD_1 = 116;
+	public static final byte GRASS_DEAD_2 = 117;
+	public static final byte GRASS_DEAD_3 = 118;
+	public static final byte GRASS_DEAD_4 = 119;
+	
+	public static final byte GRASS_FROZEN_0 = 120;
+	public static final byte GRASS_FROZEN_1 = 121;
+	public static final byte GRASS_FROZEN_2 = 122;
+	public static final byte GRASS_FROZEN_3 = 123;
+	public static final byte GRASS_FROZEN_4 = 124;
+	
+	public static final byte GRASS_FOREST_0 = 125;
+	public static final byte GRASS_FOREST_1 = 126;
+	public static final byte GRASS_FOREST_2 = 127;
+	public static final byte GRASS_FOREST_3 = (byte) 128;
+	public static final byte GRASS_FOREST_4 = (byte) 129;
+	
+	public static final byte GRASS_JUNGLE_0 = (byte) 130;
+	public static final byte GRASS_JUNGLE_1 = (byte) 131;
+	public static final byte GRASS_JUNGLE_2 = (byte) 132;
+	public static final byte GRASS_JUNGLE_3 = (byte) 133;
+	public static final byte GRASS_JUNGLE_4 = (byte) 134;
+	
+	public static final byte GRASS_SEA_0 = (byte) 135;
+	public static final byte GRASS_SEA_1 = (byte) 136;
+	public static final byte GRASS_SEA_2 = (byte) 137;
+	public static final byte GRASS_SEA_3 = (byte) 138;
+	public static final byte GRASS_SEA_4 = (byte) 139;
+	
+	public static final byte GRASS_SEAWEED_0 = (byte) 140;
+	public static final byte GRASS_SEAWEED_1 = (byte) 141;
+	public static final byte GRASS_SEAWEED_2 = (byte) 142;
+	public static final byte GRASS_SEAWEED_3 = (byte) 143;
+	public static final byte GRASS_SEAWEED_4 = (byte) 144;
+	
+	public static final byte WATER_FLOWING = (byte) 202;
+	public static final byte WATER_INFINITY = (byte) 203;
+	
+	public static final int LAST_ID = WATER_INFINITY & 255;
 	
 	private static final String[] NAMES = new String[LAST_ID + 1];
 	private static final String UNKNOWN = "air";
 	
 	public static String getMaterialName(int type) {
 		if (type < 0 || type > LAST_ID) return UNKNOWN;
-		return NAMES[type];
+		String name = NAMES[type];
+		return name == null ? UNKNOWN : name;
+	}
+	
+	private static byte getAnyGrass(int grass, int length) {
+		length = Math.max(0, Math.min(length, 4));
+		return (byte) (grass + length);
+	}
+	
+	public static byte getGrass(int length) {
+		return getAnyGrass(GRASS_0, length);
+	}
+	
+	public static byte getAridGrass(int length) {
+		return getAnyGrass(GRASS_ARID_0, length);
+	}
+	
+	public static byte getDryGrass(int length) {
+		return getAnyGrass(GRASS_DRY_0, length);
+	}
+	
+	public static byte getDeadGrass(int length) {
+		return getAnyGrass(GRASS_DEAD_0, length);
+	}
+	
+	public static byte getFrozenGrass(int length) {
+		return getAnyGrass(GRASS_FROZEN_0, length);
+	}
+	
+	public static byte getForestGrass(int length) {
+		return getAnyGrass(GRASS_FOREST_0, length);
+	}
+	
+	public static byte getJungleGrass(int length) {
+		return getAnyGrass(GRASS_JUNGLE_0, length);
+	}
+	
+	public static byte getSeaGrass(int length) {
+		return getAnyGrass(GRASS_SEA_0, length);
+	}
+	
+	public static byte getSeaweedGrass(int length) {
+		return getAnyGrass(GRASS_SEAWEED_0, length);
 	}
 	
 	static {
