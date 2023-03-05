@@ -1,8 +1,5 @@
 package paulevs.bluelib.blueprint.object;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class BlueprintObjectType {
 	public static final short BRAZIER = 0;
 	public static final short DOOR_1 = 1;
@@ -57,8 +54,20 @@ public class BlueprintObjectType {
 	public static final short TRASHCAN_2 = 66;
 	public static final short SHOOTING_TARGET_1 = 67;
 	public static final short SHOOTING_TARGET_2 = 68;
+	public static final short WEATHERVANE = 69;
+	public static final short GRINDSTONE = 70;
+	public static final short GRINDER = 71;
+	public static final short SPINNINGWHEEL = 72;
+	public static final short TANNING_RACK = 73;
+	public static final short JACK_O_LANTERN_1 = 80;
+	public static final short JACK_O_LANTERN_2 = 81;
+	public static final short SNOWMAN = 82;
+	public static final short STANDING_TORCH = 90;
+	public static final short CHICKENCOOP = 95;
 	
-	private static final Map<Short, String> NAMES = new HashMap<>();
+	public static final short LAST_ID = CHICKENCOOP;
+	
+	private static final String[] NAMES = new String[LAST_ID + 1];
 	private static final String UNKNOWN = "unknown";
 	
 	/**
@@ -67,8 +76,10 @@ public class BlueprintObjectType {
 	 * @param type type of the object as short.
 	 * @return {@link String} object name.
 	 */
-	public static String getObjectName(short type) {
-		return NAMES.getOrDefault(type, UNKNOWN);
+	public static String getObjectName(int type) {
+		if (type < 0 || type > LAST_ID) return UNKNOWN;
+		String name = NAMES[type];
+		return name == null ? UNKNOWN : name;
 	}
 	
 	/**
@@ -76,63 +87,74 @@ public class BlueprintObjectType {
 	 * @param type type of the object as short.
 	 * @return {@code true} if there is a name for object.
 	 */
-	public static boolean isKnownObject(short type) {
-		return NAMES.containsKey(type);
+	public static boolean isKnownObject(int type) {
+		if (type < 0 || type > LAST_ID) return false;
+		return NAMES[type] != null;
 	}
 	
 	static {
-		NAMES.put(BRAZIER, "brazier");
-		NAMES.put(DOOR_1, "door1");
-		NAMES.put(WOOD_SHELF_1, "woodshelf1");
-		NAMES.put(CHEST_1, "chest1");
-		NAMES.put(CHAIR, "chair");
-		NAMES.put(TABLE, "table");
-		NAMES.put(LOG_BENCH, "logbench");
-		NAMES.put(ANIMAL_FEEDER, "animalfeeder");
-		NAMES.put(BIRD_HOUSE, "birdhouse");
-		NAMES.put(TORO, "toro");
-		NAMES.put(CANDLE, "candle");
-		NAMES.put(LANTERN, "lantern");
-		NAMES.put(CAMPFIRE, "campfire");
-		NAMES.put(BONFIRE, "bonfire");
-		NAMES.put(FIRE_LOGS, "firelogs");
-		NAMES.put(WALL_TORCH, "walltorch");
-		NAMES.put(CLOCK, "clock");
-		NAMES.put(GRANDFATHER_CLOCK, "grandfatherclock");
-		NAMES.put(BED_OLD_1, "bedold1");
-		NAMES.put(LADDER, "ladder");
-		NAMES.put(XMAS_TREE, "xmastree");
-		NAMES.put(XMAS_WREATH, "xmaswreath");
-		NAMES.put(PRIMITIVE_WORKBENCH, "primitiveworkbench");
-		NAMES.put(WORKBENCH, "workbench");
-		NAMES.put(WORKBENCH_MODERN, "workbenchmodern");
-		NAMES.put(BLUEPRINT_TABLE, "blueprinttable");
-		NAMES.put(ANVIL, "anvil");
-		NAMES.put(CONSTRUCTION_BARRIER, "constructionbarrier");
-		NAMES.put(BARRIER_LIGHT, "barrierlight");
-		NAMES.put(CROWD_BARRIER, "crowdbarrier");
-		NAMES.put(MEAT_DRYER, "meatdryer");
-		NAMES.put(FLOODLIGHT, "floodlight");
-		NAMES.put(PRIMITIVE_SHELTER, "primitiveshelter");
-		NAMES.put(SHELTER_CANOPY_1, "sheltercanopy1");
-		NAMES.put(SHELTER_CANOPY_1_B, "sheltercanopy1b");
-		NAMES.put(TENT_SMALL, "tentsmall");
-		NAMES.put(TENT_MODERN, "tentmodern");
-		NAMES.put(STRAW_BED, "strawbed");
-		NAMES.put(MATTRESS, "mattress");
-		NAMES.put(PRIMITIVE_FURNACE, "primitivefurnace");
-		NAMES.put(BENCH_OLD, "benchold");
-		NAMES.put(SOCCER_GOAL, "soccergoal");
-		NAMES.put(WOODEN_BARREL, "woodenbarrel");
-		NAMES.put(WOODEN_BARREL_OPEN, "woodenbarrelopen");
-		NAMES.put(TROUGH, "trough");
-		NAMES.put(BULK_HEAD_LAMP_1, "bulkheadlamp1");
-		NAMES.put(BULK_HEAD_LAMP_2, "bulkheadlamp2");
-		NAMES.put(STREET_LAMP_1, "streetlamp1");
-		NAMES.put(CABINET_1, "cabinet1");
-		NAMES.put(TRASHCAN_1, "trashcan1");
-		NAMES.put(TRASHCAN_2, "trashcan2");
-		NAMES.put(SHOOTING_TARGET_1, "shootingtarget1");
-		NAMES.put(SHOOTING_TARGET_2, "shootingtarget2");
+		NAMES[BRAZIER] = "brazier";
+		NAMES[DOOR_1] = "door_1";
+		NAMES[WOOD_SHELF_1] = "wood_shelf_1";
+		NAMES[CHEST_1] = "chest_1";
+		NAMES[CHAIR] = "chair";
+		NAMES[TABLE] = "table";
+		NAMES[LOG_BENCH] = "log_bench";
+		NAMES[ANIMAL_FEEDER] = "animal_feeder";
+		NAMES[BIRD_HOUSE] = "bird_house";
+		NAMES[TORO] = "toro";
+		NAMES[CANDLE] = "candle";
+		NAMES[LANTERN] = "lantern";
+		NAMES[CAMPFIRE] = "campfire";
+		NAMES[BONFIRE] = "bonfire";
+		NAMES[FIRE_LOGS] = "fire_logs";
+		NAMES[WALL_TORCH] = "wall_torch";
+		NAMES[CLOCK] = "clock";
+		NAMES[GRANDFATHER_CLOCK] = "grandfather_clock";
+		NAMES[BED_OLD_1] = "bed_old_1";
+		NAMES[LADDER] = "ladder";
+		NAMES[XMAS_TREE] = "xmas_tree";
+		NAMES[XMAS_WREATH] = "xmas_wreath";
+		NAMES[PRIMITIVE_WORKBENCH] = "primitive_workbench";
+		NAMES[WORKBENCH] = "workbench";
+		NAMES[WORKBENCH_MODERN] = "workbench_modern";
+		NAMES[BLUEPRINT_TABLE] = "blueprint_table";
+		NAMES[ANVIL] = "anvil";
+		NAMES[CONSTRUCTION_BARRIER] = "construction_barrier";
+		NAMES[BARRIER_LIGHT] = "barrier_light";
+		NAMES[CROWD_BARRIER] = "crowd_barrier";
+		NAMES[MEAT_DRYER] = "meat_dryer";
+		NAMES[FLOODLIGHT] = "floodlight";
+		NAMES[PRIMITIVE_SHELTER] = "primitive_shelter";
+		NAMES[SHELTER_CANOPY_1] = "shelter_canopy_1";
+		NAMES[SHELTER_CANOPY_1_B] = "shelter_canopy_1_b";
+		NAMES[TENT_SMALL] = "tent_small";
+		NAMES[TENT_MODERN] = "tent_modern";
+		NAMES[STRAW_BED] = "straw_bed";
+		NAMES[MATTRESS] = "mattress";
+		NAMES[PRIMITIVE_FURNACE] = "primitive_furnace";
+		NAMES[BENCH_OLD] = "bench_old";
+		NAMES[SOCCER_GOAL] = "soccer_goal";
+		NAMES[WOODEN_BARREL] = "wooden_barrel";
+		NAMES[WOODEN_BARREL_OPEN] = "wooden_barrel_open";
+		NAMES[TROUGH] = "trough";
+		NAMES[BULK_HEAD_LAMP_1] = "bulk_head_lamp_1";
+		NAMES[BULK_HEAD_LAMP_2] = "bulk_head_lamp_2";
+		NAMES[STREET_LAMP_1] = "street_lamp_1";
+		NAMES[CABINET_1] = "cabinet_1";
+		NAMES[TRASHCAN_1] = "trashcan_1";
+		NAMES[TRASHCAN_2] = "trashcan_2";
+		NAMES[SHOOTING_TARGET_1] = "shooting_target_1";
+		NAMES[SHOOTING_TARGET_2] = "shooting_target_2";
+		NAMES[WEATHERVANE] = "weathervane";
+		NAMES[GRINDSTONE] = "grindstone";
+		NAMES[GRINDER] = "grinder";
+		NAMES[SPINNINGWHEEL] = "spinningwheel";
+		NAMES[TANNING_RACK] = "tanning_rack";
+		NAMES[JACK_O_LANTERN_1] = "jack_o_lantern_1";
+		NAMES[JACK_O_LANTERN_2] = "jack_o_lantern_2";
+		NAMES[SNOWMAN] = "snowman";
+		NAMES[STANDING_TORCH] = "standing_torch";
+		NAMES[CHICKENCOOP] = "chickencoop";
 	}
 }
